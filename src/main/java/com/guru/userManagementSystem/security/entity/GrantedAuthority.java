@@ -1,0 +1,27 @@
+package com.guru.userManagementSystem.security.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "ums_user_granted_authority")
+public class GrantedAuthority {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ums_user_granted_authority_seq")
+    @SequenceGenerator(name = "ums_user_granted_authority_seq", sequenceName = "ums_user_granted_authority_seq", initialValue = 100000, allocationSize = 20)
+    private Long id;
+
+    private String authorityName;
+
+    @ManyToMany
+    @JoinTable(name = "ums_user_authority_role", joinColumns = @JoinColumn(name = "user_authority_id"), inverseJoinColumns = @JoinColumn(name = "user_role_id"))
+    private List<Role> roles;
+}
