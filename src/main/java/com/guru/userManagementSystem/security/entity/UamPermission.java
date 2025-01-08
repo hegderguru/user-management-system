@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "ums_user_permission")
-public class Permission {
+public class UamPermission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ums_user_permission_seq")

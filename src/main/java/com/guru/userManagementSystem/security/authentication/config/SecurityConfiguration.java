@@ -26,10 +26,12 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(req -> req.requestMatchers(/*"h2-console",*/"/authenticate").permitAll().anyRequest().authenticated());
+        httpSecurity.authorizeHttpRequests(req -> req
+                .requestMatchers("/h2-console/**", "/test.do/**", "/authenticate").permitAll().anyRequest().authenticated());
         //httpSecurity.formLogin(AbstractHttpConfigurer::disable);
         httpSecurity.formLogin(Customizer.withDefaults());
         httpSecurity.httpBasic(Customizer.withDefaults());
+
         return httpSecurity.build();
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "ums_user_role")
-public class Role {
+public class UamRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ums_user_role_seq")
@@ -21,5 +21,5 @@ public class Role {
 
     @OneToMany
     @JoinTable(name = "ums_user_role_permission",joinColumns = @JoinColumn(name = "user_role_id"),inverseJoinColumns = @JoinColumn(name = "user_permission_id"))
-    List<Permission> permissions;
+    List<UamPermission> uamPermissions;
 }

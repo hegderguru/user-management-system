@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "ums_user_granted_authority")
-public class GrantedAuthority {
+public class UamGrantedAuthority implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ums_user_granted_authority_seq")
@@ -23,5 +24,10 @@ public class GrantedAuthority {
 
     @ManyToMany
     @JoinTable(name = "ums_user_authority_role", joinColumns = @JoinColumn(name = "user_authority_id"), inverseJoinColumns = @JoinColumn(name = "user_role_id"))
-    private List<Role> roles;
+    private List<UamRole> uamRoles;
+
+    @Override
+    public String getAuthority() {
+        return authorityName;
+    }
 }
