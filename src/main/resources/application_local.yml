@@ -1,7 +1,7 @@
 
 spring:
   datasource:
-    url: jdbc:h2:mem:localDb
+    url: jdbc:h2:mem:local
 
 logging:
   level:

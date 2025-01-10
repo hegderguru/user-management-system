@@ -4,17 +4,16 @@ import com.guru.userManagementSystem.security.service.UamUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-@Profile("prod")
+@Profile("!prod")
 @Component
 @RequiredArgsConstructor
-public class UmsUsernamePasswordAuthenticationProvider implements AuthenticationProvider {
+public class UmsUsernamePasswordAuthenticationProviderTest implements AuthenticationProvider {
 
     private final UamUserDetailsService uamUserDetailsService;
 
@@ -25,12 +24,7 @@ public class UmsUsernamePasswordAuthenticationProvider implements Authentication
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
         UserDetails uamUserDetails = uamUserDetailsService.loadUserByUsername(username);
-
-        if (passwordEncoder.matches(password, uamUserDetails.getPassword())) {
-            return new UsernamePasswordAuthenticationToken(username, password, uamUserDetails.getAuthorities());
-        } else {
-            throw new BadCredentialsException("Invalid username or password");
-        }
+        return new UsernamePasswordAuthenticationToken(username, password, uamUserDetails.getAuthorities());
     }
 
     @Override
