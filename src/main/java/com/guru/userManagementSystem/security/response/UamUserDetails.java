@@ -1,6 +1,6 @@
 package com.guru.userManagementSystem.security.response;
 
-import com.guru.userManagementSystem.security.entity.UamGrantedAuthority;
+import com.guru.userManagementSystem.security.entity.UmsGrantedAuthority;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,7 +17,7 @@ public class UamUserDetails implements UserDetails {
 
     private String username;
 
-    private Set<UamGrantedAuthority> authorities;
+    private Set<UmsGrantedAuthority> authorities;
 
     private boolean accountNonExpired;
 

@@ -25,5 +25,5 @@ public class UamRole {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "ums_user_role_permission", joinColumns = @JoinColumn(name = "user_role_id"), inverseJoinColumns = @JoinColumn(name = "user_permission_id"))
-    List<UamPermission> uamPermissions;
+    List<UmsPermission> umsPermissions;
 }

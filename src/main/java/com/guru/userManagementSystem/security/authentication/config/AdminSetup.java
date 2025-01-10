@@ -1,7 +1,7 @@
 package com.guru.userManagementSystem.security.authentication.config;
 
-import com.guru.userManagementSystem.security.entity.UamGrantedAuthority;
-import com.guru.userManagementSystem.security.entity.UamPermission;
+import com.guru.userManagementSystem.security.entity.UmsGrantedAuthority;
+import com.guru.userManagementSystem.security.entity.UmsPermission;
 import com.guru.userManagementSystem.security.entity.UamRole;
 import com.guru.userManagementSystem.security.entity.UamUser;
 import com.guru.userManagementSystem.security.service.UamUserDetailsService;
@@ -32,11 +32,11 @@ public class AdminSetup {
                     .enabled(true)
                     .accountNonLocked(true)
                     .credentialsNonExpired(true)
-                    .authorities(new HashSet<>(List.of(UamGrantedAuthority.builder()
+                    .authorities(new HashSet<>(List.of(UmsGrantedAuthority.builder()
                             .authorityName(AdminConstants.UMS_ADMIN_AUTHORITY_NAME)
                             .uamRoles(new ArrayList<>(List.of(UamRole.builder()
                                     .roleName(AdminConstants.UMS_ADMIN_ROLE_NAME)
-                                    .uamPermissions(new ArrayList<>(List.of(UamPermission.builder()
+                                    .umsPermissions(new ArrayList<>(List.of(UmsPermission.builder()
                                             .write(true)
                                             .read(true)
                                             .update(true)

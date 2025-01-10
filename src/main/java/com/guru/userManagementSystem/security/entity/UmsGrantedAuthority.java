@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "ums_user_granted_authority")
-public class UamGrantedAuthority implements GrantedAuthority {
+public class UmsGrantedAuthority implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ums_user_granted_authority_seq")

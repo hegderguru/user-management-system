@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "ums_user_permission")
-public class UamPermission {
+public class UmsPermission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ums_user_permission_seq")

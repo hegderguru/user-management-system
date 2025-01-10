@@ -25,7 +25,7 @@ public class UamUser {
     private String username;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<UamGrantedAuthority> authorities = new HashSet<>();
+    private Set<UmsGrantedAuthority> authorities = new HashSet<>();
 
     private boolean accountNonExpired;
 
@@ -35,7 +35,7 @@ public class UamUser {
 
     private boolean enabled;
 
-    public UamUser(String username, Set<UamGrantedAuthority> authorities, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled) {
+    public UamUser(String username, Set<UmsGrantedAuthority> authorities, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled) {
         this.username = username;
         this.authorities = authorities;
         this.accountNonExpired = accountNonExpired;
