@@ -3,6 +3,7 @@ package com.guru.userManagementSystem.security.service;
 import com.guru.userManagementSystem.security.entity.UamUser;
 import com.guru.userManagementSystem.security.repository.UserRepository;
 import com.guru.userManagementSystem.security.response.UamUserDetails;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+@Data
 @Service
 public class UamUserDetailsService implements UserDetailsService {
 

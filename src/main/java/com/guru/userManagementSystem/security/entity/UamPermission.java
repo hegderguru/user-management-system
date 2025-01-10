@@ -2,8 +2,12 @@ package com.guru.userManagementSystem.security.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Builder
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity

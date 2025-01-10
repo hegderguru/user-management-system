@@ -25,7 +25,6 @@ public class UamUser {
     private String username;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "ums_user_granted_authority", joinColumns = @JoinColumn(name = "ums_user_id"), inverseJoinColumns = @JoinColumn(name = "ums_user_granted_authority_id"))
     private Set<UamGrantedAuthority> authorities = new HashSet<>();
 
     private boolean accountNonExpired;
