@@ -13,9 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.password.HaveIBeenPwnedRestApiPasswordChecker;
 
-@Profile("prod")
+@Profile("!prod")
 @Configuration
-public class SecurityConfiguration {
+public class SecurityConfigurationTest {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
