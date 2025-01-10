@@ -1,6 +1,5 @@
 package com.guru.userManagementSystem.security.authentication.config;
 
-import com.guru.userManagementSystem.security.response.UamUserDetails;
 import com.guru.userManagementSystem.security.service.UamUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -9,7 +8,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
+@Component
 @RequiredArgsConstructor
 public class UmsUsernamePasswordAuthenticationProvider implements AuthenticationProvider {
 
@@ -23,10 +24,9 @@ public class UmsUsernamePasswordAuthenticationProvider implements Authentication
         String password = authentication.getCredentials().toString();
         UserDetails uamUserDetails = uamUserDetailsService.loadUserByUsername(username);
 
-        if(passwordEncoder.matches(password,uamUserDetails.getPassword())){
-            return new UsernamePasswordAuthenticationToken(username,password,uamUserDetails.getAuthorities());
-        }
-        else {
+        if (passwordEncoder.matches(password, uamUserDetails.getPassword())) {
+            return new UsernamePasswordAuthenticationToken(username, password, uamUserDetails.getAuthorities());
+        } else {
             throw new BadCredentialsException("Invalid username or password");
         }
     }
