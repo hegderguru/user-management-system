@@ -6,6 +6,7 @@ import org.springframework.security.authentication.password.CompromisedPasswordC
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -33,6 +34,8 @@ public class SecurityConfiguration {
         httpSecurity.formLogin(Customizer.withDefaults());
         httpSecurity.httpBasic(Customizer.withDefaults());
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
+        //httpSecurity.headers(AbstractHttpConfigurer::disable);
+        httpSecurity.headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
         return httpSecurity.build();
     }
 
