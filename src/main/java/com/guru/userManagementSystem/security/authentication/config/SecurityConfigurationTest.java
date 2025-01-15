@@ -33,7 +33,7 @@ public class SecurityConfigurationTest {
                 .requestMatchers("/h2-console/**", "register", "authenticate").permitAll().anyRequest().authenticated());
         //httpSecurity.formLogin(AbstractHttpConfigurer::disable);
         httpSecurity.formLogin(Customizer.withDefaults());
-        httpSecurity.httpBasic(Customizer.withDefaults());
+        httpSecurity.httpBasic(httpSecurityHttpBasicConfigurer -> httpSecurityHttpBasicConfigurer.authenticationEntryPoint(new UmsBasicAuthenticationEntryPoint()));
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
         //httpSecurity.headers(AbstractHttpConfigurer::disable);
         httpSecurity.headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
