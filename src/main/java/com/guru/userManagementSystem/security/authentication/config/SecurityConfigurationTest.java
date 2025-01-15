@@ -1,5 +1,6 @@
 package com.guru.userManagementSystem.security.authentication.config;
 
+import com.guru.userManagementSystem.security.exception.umsAccessDeniedHanlder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -37,6 +38,7 @@ public class SecurityConfigurationTest {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
         //httpSecurity.headers(AbstractHttpConfigurer::disable);
         httpSecurity.headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
+        httpSecurity.exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.accessDeniedHandler(new umsAccessDeniedHanlder()).accessDeniedPage("/denied"));
         return httpSecurity.build();
     }
 

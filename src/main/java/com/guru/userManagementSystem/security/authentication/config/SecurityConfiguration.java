@@ -1,5 +1,6 @@
 package com.guru.userManagementSystem.security.authentication.config;
 
+import com.guru.userManagementSystem.security.exception.umsAccessDeniedHanlder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -31,7 +32,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.requiresChannel(channelRequestMatcherRegistry -> channelRequestMatcherRegistry.anyRequest().requiresSecure())
                 .authorizeHttpRequests(req -> req
-                .requestMatchers("/h2-console/**", "register", "authenticate").permitAll().anyRequest().authenticated());
+                        .requestMatchers("/h2-console/**", "register", "authenticate").permitAll().anyRequest().authenticated());
         //httpSecurity.formLogin(AbstractHttpConfigurer::disable);
         httpSecurity.formLogin(Customizer.withDefaults());
         //httpSecurity.httpBasic(Customizer.withDefaults());
@@ -40,6 +41,7 @@ public class SecurityConfiguration {
         //httpSecurity.headers(AbstractHttpConfigurer::disable);
         httpSecurity.headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
         //httpSecurity.exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(new UmsBasicAuthenticationEntryPoint())); //Globalconfig
+        httpSecurity.exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.accessDeniedHandler(new umsAccessDeniedHanlder()));
         return httpSecurity.build();
     }
 
