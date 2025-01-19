@@ -31,7 +31,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.sessionManagement(httpSecuritySessionManagementConfigurer ->
-                httpSecuritySessionManagementConfigurer.invalidSessionUrl("/error"));
+                httpSecuritySessionManagementConfigurer.invalidSessionUrl("/error").maximumSessions(1));
         httpSecurity.requiresChannel(channelRequestMatcherRegistry -> channelRequestMatcherRegistry.anyRequest().requiresSecure())
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/h2-console/**", "register", "authenticate","error").permitAll().anyRequest().authenticated());
