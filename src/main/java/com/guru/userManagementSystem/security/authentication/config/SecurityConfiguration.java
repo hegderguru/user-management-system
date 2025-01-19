@@ -34,7 +34,7 @@ public class SecurityConfiguration {
         httpSecurity.sessionManagement(httpSecuritySessionManagementConfigurer ->
                 httpSecuritySessionManagementConfigurer.sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::migrateSession).invalidSessionUrl("/error").maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/sessionExpired"));
         //httpSecurity.sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::newSession));
-
+        //Spring default is change session id
         httpSecurity.requiresChannel(channelRequestMatcherRegistry -> channelRequestMatcherRegistry.anyRequest().requiresSecure())
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/h2-console/**", "register", "authenticate","error","sessionExpired").permitAll().anyRequest().authenticated());
