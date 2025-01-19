@@ -9,6 +9,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -31,7 +32,9 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.sessionManagement(httpSecuritySessionManagementConfigurer ->
-                httpSecuritySessionManagementConfigurer.invalidSessionUrl("/error").maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/sessionExpired"));
+                httpSecuritySessionManagementConfigurer.sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::migrateSession).invalidSessionUrl("/error").maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/sessionExpired"));
+        //httpSecurity.sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::newSession));
+
         httpSecurity.requiresChannel(channelRequestMatcherRegistry -> channelRequestMatcherRegistry.anyRequest().requiresSecure())
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/h2-console/**", "register", "authenticate","error","sessionExpired").permitAll().anyRequest().authenticated());
