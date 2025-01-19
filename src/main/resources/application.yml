@@ -1,12 +1,14 @@
 server:
   port: 8080
-    #servlet:
+  servlet:
+    session:
+      timeout: 2m
   #context-path=api: api
 spring:
   application:
     name: user-management-system
   profiles:
-    active: local
+    active: ${PROFILE:local}
   datasource:
     url: jdbc:h2:mem:mydb
     username: sa
