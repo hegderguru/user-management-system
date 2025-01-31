@@ -1,6 +1,6 @@
 package com.guru.userManagementSystem.security.authentication.config;
 
-import com.guru.userManagementSystem.security.exception.umsAccessDeniedHanlder;
+import com.guru.userManagementSystem.security.exception.UmsAccessDeniedHanlder;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,7 +48,7 @@ public class SecurityConfiguration {
         //httpSecurity.headers(AbstractHttpConfigurer::disable);
         httpSecurity.headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
         //httpSecurity.exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(new UmsBasicAuthenticationEntryPoint())); //Globalconfig
-        httpSecurity.exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.accessDeniedHandler(new umsAccessDeniedHanlder()));
+        httpSecurity.exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.accessDeniedHandler(new UmsAccessDeniedHanlder()));
         return httpSecurity.build();
     }
 

@@ -1,10 +1,13 @@
 package com.guru.userManagementSystem.security.service;
 
+import com.guru.userManagementSystem.security.authentication.config.AdminConstants;
 import com.guru.userManagementSystem.security.entity.UamUser;
 import com.guru.userManagementSystem.security.repository.UserRepository;
 import com.guru.userManagementSystem.security.response.UamUserDetails;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -58,6 +61,10 @@ public class UamUserDetailsService implements UserDetailsService {
     }
 
     public UamUserDetails createUamUser(UamUserDetails uamUserDetails) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!AdminConstants.UMS_ADMIN_NAME.equals(authentication.getName())) {
+            throw new UsernameNotFoundException("User not allowed to create users!");
+        }
         return buildBuildUamUserDetails(userRepository.save(buildUamUser(uamUserDetails)));
     }
 

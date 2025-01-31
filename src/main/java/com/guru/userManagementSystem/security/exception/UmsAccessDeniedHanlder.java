@@ -13,7 +13,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import java.io.IOException;
 import java.util.Objects;
 
-public class umsAccessDeniedHanlder implements AccessDeniedHandler {
+public class UmsAccessDeniedHanlder implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         response.setHeader("UMS-AUTH_DEINED", "Authentication failure");
