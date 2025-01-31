@@ -1,6 +1,7 @@
 package com.guru.userManagementSystem.security.authentication.config;
 
 import com.guru.userManagementSystem.security.exception.umsAccessDeniedHanlder;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -48,6 +50,12 @@ public class SecurityConfiguration {
         //httpSecurity.exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(new UmsBasicAuthenticationEntryPoint())); //Globalconfig
         httpSecurity.exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.accessDeniedHandler(new umsAccessDeniedHanlder()));
         return httpSecurity.build();
+    }
+
+    public InitializingBean initializingBean(){
+        //return ()-> SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);// If you use @Async
+        //return ()-> SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_GLOBAL);// Access for all thread; used for Desktop apps
+        return ()-> SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_THREADLOCAL);// Default
     }
 
 }
